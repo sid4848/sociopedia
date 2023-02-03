@@ -13,7 +13,7 @@ export const createPost = async (req, res) => {
       lastName: user.lastName,
       location: user.location,
       description,
-      userPictturePath: user.picturePath,
+      userPicturePath: user.picturePath,
       picturePath,
       likes: {},
       comments: [],
@@ -67,7 +67,7 @@ export const likePost = async (req, res) => {
       { likes: post.likes },
       { new: true }
     );
-    res.status(200).json(post);
+    res.status(200).json(updatePost);
   } catch (error) {
     res.status(404).jsin({ message: err.message });
   }
