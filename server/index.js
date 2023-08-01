@@ -58,9 +58,13 @@ app.use("/posts", postsRoutes);
 // MONGOOSE SETUP
 mongoose.set("strictQuery", true);
 
+const MONGO_URL = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER_NAME}.wu6hqgy.mongodb.net/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority`;
+
+// const MONGO_URL = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER_NAME}.mongodb.net/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority`;
+
 const PORT = process.env.PORT || 6001;
 mongoose
-  .connect(process.env.MONGO_URL, {
+  .connect(MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -68,7 +72,7 @@ mongoose
     app.listen(PORT, () => console.log(`Server POST : ${PORT}`));
 
     // ADD DATA ONE TIME
-    // User.insertMany(users);
-    // Post.insertMany(posts);
+    User.insertMany(users);
+    Post.insertMany(posts);
   })
   .catch((error) => console.log(`${error} did not connect`));
